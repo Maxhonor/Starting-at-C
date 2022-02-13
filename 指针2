@@ -1,0 +1,244 @@
+/*#include<stdio.h>
+//通过指针引用字符串
+int main()
+{
+	int i=0;
+	char a[] = "I am a student. ", b[20];
+	for (i = 0; *(a + i) != '\0'; i++)
+	{
+		*(b + i) = *(a + i);//进行字符串的转移
+	}
+	*(b + i) = '\0';
+	printf("string a is :%s\n", a);
+	printf("string b is :");
+	//printf("%s", b);或
+	for (i = 0; *(b + i) != '\0'; i++)
+	{
+		printf("%c",*(b+i));
+	}
+	printf("\n");
+	return 0;
+	//定义两个指针变量p1和p2分别指向字符数组a和b
+	//改变指针变量p1和p2的值使其顺序指向数组中的各元素
+	char a[] = "I am a good boy.", b[20], *p1, *p2;
+	p1 = a;
+	p2 = b;
+	for (; *p1 != '\0'; p1++, p2++)
+	{
+		*p2 = *p1;//赋值语句 复制
+	}
+	*p2 = '\0';
+	printf("string a is:%s\n",a);
+	printf("string b is:%s\n",b);
+	return 0;
+}*/
+//#include<stdio.h>
+//用字符数组名作为函数参数
+//void copy_string(char from[], char to[])//形参用字符数组接收
+//{
+//	int i = 0;
+//	while (from[i] != '\0')
+//	{
+//		to[i] = from[i];
+//		i++;
+//	}
+//	to[i] = '\0';
+//}
+//int main()
+//{
+//	char a[] = "I am a teacher.";
+//	char b[] = "You are a student.";
+
+//  char *from = a;
+//  char *to = b;
+
+//	printf("string a=%s\nstring b=%s\n", a, b);
+//	printf("copy string a to string b:\n");
+//	copy_string(a, b);//字符数组名作为函数的实参
+
+//  copy_string(from, to);//实参为字符指针变量
+
+//	printf("string a=%s\nstring b=%s\n", a, b);
+//	return 0;
+//}
+//用字符指针变量作形参和实参
+/*void copy_string(char *from, char *to)//用字符指针变量作形参
+{
+	
+	while (*to++ = *from++);
+	*to= '\0';
+}
+int main()
+{
+	char a[] = "I am a teacher.";
+	char b[] = "You are a student.";
+	char *p = b;
+	printf("string a=%s\nstring b=%s\n", a, b);
+	printf("copy string a to b:\n");
+	copy_string(a, p);//用字符指针变量作实参
+	printf("string a=%s\nstring b=%s", a, b);
+	return 0;
+}*/
+/*#include<stdio.h>
+int main()
+{
+	char q[] = "I love China!";
+	char *p = q;//指针变量的值是可以改变的
+	p = p + 7;
+	printf("%s\n", p);
+	return 0;
+}*/
+/*#include<stdio.h>
+int max(int x, int y)
+{
+	int z = 0;
+	if (x < y) z = y;
+	else z = x;
+	return z;
+}
+int main()
+{
+	int(*p)(int, int);//定义指向函数的指针变量p
+	int a, b, c;
+	p = max;
+	scanf("%d%d", &a, &b);
+	c = (*p)(a, b);
+	printf("a=%d\nb=%d\nmax=%d\n", a, b, c);
+	return 0;
+}*/
+/*#include<stdio.h>
+//输入两个整数进行四则运算利用指针函数
+int add(int x, int y)
+{
+	return x + y;
+}
+int minus(int x, int y)
+{
+	return x - y;
+}
+int cf(int x, int y)
+{
+	return x * y;
+}
+int division(int x, int y)
+{
+	return x / y;
+}
+int main()
+{
+	int a, b,c;
+	scanf("%d,%d\n", &a, &b);
+	int(*p)(int, int);
+	p = NULL;//初始化指针
+	char zf;
+	zf= getchar();
+	switch (zf)
+	{
+	  case '+':
+		p = add;
+		break;
+	  case '-':
+		p = minus;
+		break;
+	  case '*':
+		p = cf;
+		break;
+	  case '/':
+		p = division;
+		break;
+	}
+	c = (*p)(a,b);
+	printf("%d%c%d=%d\n", a, zf, b, c);
+	return 0;
+}*/
+/*#include<stdio.h>
+//返回指针值的函数
+//3个学生，每个学生有4门课程
+float *search(float(*pointer)[4], int t)//形参用指向一维数组中四个元素的指针 
+{
+	float *pt;
+	pt = *(pointer + t);
+	return pt;
+}
+int main()
+{
+	float score[][4] = { {60,70,80,90},{56,67,88,89},{66,89,56,96} };
+	float *p;
+	int i, k;
+	printf("enter the number of student:");
+	scanf("%d",&k);
+	printf("The scores of No.%d are:\n", k);
+	p = search(score, k);//调用函数，且该函数的返回值为指针得到(&score[k][0]的地址)
+	for (i = 0; i < 4; i++)
+	{
+		printf("%5.2f\t", *(p + i));//指向第i门课程的成绩
+	}
+	return 0;
+}*/
+//找出其中有不及格的课程的学生以及学生号
+/*#include<stdio.h>
+float *search(float(*pointer)[4])
+{
+	float *pt;
+	pt = NULL;
+	for (int i=0; i < 4; i++)
+	{
+		if (*(*pointer + i) < 60)
+			pt = *pointer;//让指针pt指向score[i][0]
+	}
+	return pt;
+}
+int main()
+{
+	float score[][4] = { {60,70,80,90},{66,57,88,89},{66,89,53,96} };
+	float *p;
+	for (int i = 0; i < 3; i++)
+	{
+		p = search(score + i);//第i行的起始地址
+		if (p == *(score + i))
+		{
+			printf("No.%d score:", i);
+			for (int j = 0; j < 4; j++)
+			{
+				printf("%5.2f ", *(p + j));
+			}
+			printf("\n");
+		}
+
+	}
+	return 0;
+}*/
+//什么是指针数组，一个数组其元素均为指针类型数据称为指针数组，该数组中存放的每一个元素都存放一个地址
+#include<stdio.h>
+#include<string.h>
+void sort(char *name[], int n)
+{
+	char *t;
+	for (int i = 0; i < n-1; i++)
+	{
+		for (int j = i+1; j < n ; j++)
+		{
+			if (strcmp(name[i] ,name[j])>0)//进行指向互换
+			{
+				t = name[i];
+				name[i] = name[j];
+				name[j] = t;
+			}
+		}
+	}
+}
+void print(char *name[], int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		printf("%s\n", name[i]);
+	}
+}
+int main()
+{
+	char *name[] = {"Follow me","BASIC","Great Wall","FORTRAN","Computer design"};//定义指针数组，它的元素分别指向五个字符串
+	int n = 5;
+	sort(name, n);
+	print(name, n);
+	return 0;
+}
