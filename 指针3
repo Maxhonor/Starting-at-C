@@ -1,0 +1,317 @@
+/*#include<stdio.h>
+//指针数组作main函数的形参
+int main(int argc,char *argv[])
+{
+	int i;
+	for (i = 1; i < argc; i++)
+	{
+		printf("%s%c", argv[i], (i < argc - 1) ? ' ' : '\n');
+	}
+	return 0;
+}*/
+//从键盘上输入3个整数，进行从大到小排序并输出。
+//输出每个整数后再加一空格进行间隔。
+//例：
+//（1）输入：1 2 3 输出：3 2 1
+//（2）输入：2 3 1  输出：3 2 1
+/*#include<stdio.h>
+void swap(int *p, int *q)
+{
+	int t = 0;
+	t = *p;
+	*p = *q;
+	*q = t;
+}
+int main()
+{
+	
+	int n1, n2, n3;
+	int *p1, *p2, *p3;
+	scanf("%d%d%d", &n1, &n2, &n3);
+	p1 = &n1;
+	p2 = &n2;
+	p3 = &n3;
+	if (n1 < n2) { swap(p1, p2); }
+	if (n1 < n3) { swap(p1, p3); }
+	if (n2 < n3) { swap(p2, p3); }
+	printf("%d %d %d \n", n1, n2, n3);
+	return 0;
+}*/
+/*#include<stdio.h>
+#include<string.h>
+//输入3个字符串，进行从小到大排序并输出。
+void swap(char *p, char *q)
+{
+	char a[81];//字符串的互换
+	strcpy(a, p);
+	strcpy(p, q);
+	strcpy(q, a);
+}
+int main()
+{
+	
+	char str1[81], str2[81], str3[81];
+	gets_s(str1);
+	gets_s(str2);
+	gets_s(str3);
+	if (strcmp(str1, str2) > 0) { swap(str1, str2); }
+	if (strcmp(str1, str3) > 0) { swap(str1, str3); }
+	if (strcmp(str2, str3) > 0) { swap(str2, str3); }
+	puts(str1);
+	puts(str2);
+	puts(str3);
+	return 0;
+}*/
+/*#include<stdio.h>
+//输入一行文字，找出其中大写字母、小写字母、空格、数字及其他字符各有多少。
+//（1）
+//输入：It is never too old to learn.
+//输出：upper case:1, lower case:21, space : 6, digit : 0, others : 1
+void count(char *p)
+{
+	int upper = 0, lower = 0, space = 0, digit = 0, others = 0;
+	while (*p)
+	{
+		char a = *p;
+		if (a >= 'A' && a <= 'Z') upper++;
+		else if (a >= 'a' && a <= 'z') lower++;
+		else if (a == ' ') space++;
+		else if (a >= '0' && a <= '9') digit++;
+		else others++;
+		p++;
+	}
+	printf("upper case:%d, lower case:%d, space :%d, digit :%d, others :%d", upper, lower, space, digit, others);
+}
+int main()
+{
+	char str[81];
+	gets_s(str);
+	count(str);
+	return 0;
+}*/
+/*#include<stdio.h>
+//输入一个字符串，内有数字和非数字字符，将其中连续的数字作为一个整数，依次存放到数组a中，统计共有多少个整数，并输出这些数（每个数最小宽度为8）。
+//（1）输入：abc13 3adf ? #3535df35df  输出：      13       3    3535      35
+void sort(char *p, int a[])
+{
+	int num = 0;
+	int digit = 0;
+	while (*p)
+	{
+		char ch = *p;
+		if (ch >= '0' && ch <= '9')
+		{
+			if (digit == 0)
+			{
+				digit = 1;//当前字符为数字
+				num++;
+				a[num] = ch - '0';//将字符转换为整数
+			}
+			else
+			{
+				a[num] = a[num] * 10 + ch - '0';
+			}
+		}
+		else
+		{
+			digit = 0;
+		}
+		p++;
+	}
+	for (int i = 1; i <= num; i++)
+	{
+		printf("%8d", a[i]);
+	}
+	printf("\n");
+}
+int main()
+{
+	
+	char str[81];
+	int a[80];
+	gets_s(str);
+	sort(str, a);
+	return 0;
+}*/
+//输入一个字符串，将其中的大写英文字母与数字提取出来，构成一个新的字符串并输出。
+//将新的字符串逆序存放，并输出。
+//void extract(char *p1, char *p2); //从字符串p1中提取大写英文字母与数字组成字符串p2
+//void reverse(char *p); //字符串逆序存放
+//例：
+//（1）输入：You are 250. AAA bb
+//输出：
+//Y250AAA
+//AAA052Y
+/*#include<stdio.h>
+#include<string.h>
+void extract(char *p1, char *p2)
+{
+	while(*p1)
+	{
+		char ch = *p1;
+		if ((ch >= 'A'&& ch <= 'Z') || (ch >= '0' && ch <= '9'))
+		{
+			*p2 = ch;
+			p2++;
+		}
+		p1++;
+	}
+	*p2 = '\0';
+}
+void reverse(char *p)
+{
+	int n = strlen(p);
+	char *q = p + n - 1;
+	char t;
+	for (; p < q; p++, q--)
+	{
+	     t = *p;
+		*p = *q;
+		*q = t;
+	}
+}
+int main()
+{
+	char s1[81], s2[81];//输入并存放字符串，存放新的字符串
+	gets_s(s1);
+	extract(s1, s2);
+	puts(s2);
+	reverse(s2);
+	puts(s2);
+	return 0;
+}*/
+//蓝桥杯试题：小明对数位中含有2、0、1、9的数字很感兴趣，在1到40中这样的数字包括.....共28个他们的和是574
+//请问在1到2022中，所有这样的数字的和是多少且是多少个
+/*#include<stdio.h>
+int fun(int n)
+{
+	while (n)
+	{
+		if ((n % 10 == 2) || (n % 10 == 0) || (n % 10 == 1) || (n % 10 == 9))
+		{
+			return 1;
+		}
+		n = n / 10;
+	}
+		return 0;
+}
+
+int main()
+{
+	int sum = 0;
+	int count = 0;
+	for (int i = 1; i <= 2000; i++)
+	{
+		if (fun(i) == 1)
+		{
+			sum += i;
+			count++;
+		}
+	}
+	printf("sum=%d\n", sum);
+	printf("count=%d", count);
+	return 0;
+}*/
+/*#include<stdio.h>
+//通过指针变量访问整型变量
+int main()
+{
+	int a, b, *pointer_1, *pointer_2;
+	scanf("%d%d", &a, &b);
+	pointer_1 = &a;
+	pointer_2 = &b;
+	printf("a=%d,b=%d\n*pointer_1=%d,*pointer_2=%d", a, b, *pointer_1, *pointer_2);
+	return 0;
+}*/
+/*#include<stdio.h>
+//从键盘上输入两个整数，按大小顺序输出。（用指针实现）
+//例：
+//（1）输入：5, 9 输出：a = 5, b = 9, max = 9, min = 5
+//（2）输入：6, 5 输出：a = 6, b = 5, max = 6, min = 5
+int main()
+{
+	int a, b;
+	scanf("%d,%d", &a, &b);
+	printf("a=%d,b=%d,", a, b);
+	int *c, *d,*t;
+	c = &a;
+	d = &b;
+	if (a < b)
+	{
+		t = c;
+		c = d;
+		d = t;
+
+	}
+	printf("max=%d,min=%d\n", *c, *d);
+	return 0;
+}*/
+/*#include<stdio.h>
+void swap(int *p1, int *p2)
+{
+	int p;
+	p = *p1;
+	*p1 = *p2;
+	*p2 = p;
+}
+int main()
+{
+	int a, b;
+	scanf("%d,%d", &a, &b);
+	int *pointer1, *pointer2;
+	pointer1 = &a;
+	pointer2 = &b;
+	if (a < b)
+		swap(pointer1, pointer2);
+	printf("max=%d,min=%d", *pointer1, *pointer2);
+	return 0;
+}*/
+/*#include<stdio.h>
+void swap(int *m, int *n)
+{
+	int p;
+	p = *m;
+	*m = *n;
+	*n = p;
+}
+int main()
+{
+	int a, b, c, *p1, *p2, *p3;
+	scanf("%d%d%d", &a, &b, &c);
+	p1 = &a;
+	p2 = &b;
+	p3 = &c;
+	if(a < b)
+	{
+		swap(p1, p2);
+	}
+	if (a < c)
+	{
+		swap(p1, p3);
+	}
+	if (b < c)
+	{
+		swap(p2, p3);
+	}
+	printf("%d,%d,%d", a, b, c);
+	return 0;
+}*/
+#include<stdio.h>
+#define N 5
+//通过指针变量输出整数数组a的5个元素
+int main()
+{
+	int a[N] = {0};
+	int *p = a;
+	for (int i = 0; i < N; i++)
+	{
+		scanf("%d", &a[i]);
+	}
+	for (int i = 0; i < N; i++)
+	{
+		printf("%5d", *p);
+		p++;
+	}
+	printf("\n");
+	return 0;
+}
